@@ -1,4 +1,4 @@
-module github.com/tomnomnom/gron
+module github.com/nuvolaris/gron
 
 go 1.15
 

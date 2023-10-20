@@ -1,4 +1,4 @@
-package main
+package gron
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 // A statement is a slice of tokens representing an assignment statement.
 // An assignment statement is something like:
 //
-//   json.city = "Leeds";
+//	json.city = "Leeds";
 //
 // Where 'json', '.', 'city', '=', '"Leeds"' and ';' are discrete tokens.
 // Statements are stored as tokens to make sorting more efficient, and so
@@ -213,7 +213,7 @@ func statementFromJSONSpec(str string) (statement, error) {
 			if err != nil {
 				return nil, errors.Wrap(err, "JSON internal error")
 			}
-			nstr = fmt.Sprintf("%s", nbuf)
+			nstr = string(nbuf)
 			s = append(s, token{nstr, typNumericKey})
 		default:
 			ok = false
@@ -259,7 +259,7 @@ func statementFromJSONSpec(str string) (statement, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "JSON internal error")
 	}
-	nstr = fmt.Sprintf("%s", nbuf)
+	nstr = string(nbuf)
 	s = append(s, token{nstr, t})
 
 	s = append(s, token{";", typSemi})

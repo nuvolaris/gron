@@ -1,4 +1,4 @@
-package main
+package gron
 
 import (
 	"bufio"
@@ -82,11 +82,11 @@ func init() {
 		h += "  curl -s http://jsonplaceholder.typicode.com/users/1 | gron\n"
 		h += "  gron http://jsonplaceholder.typicode.com/users/1 | grep company | gron --ungron\n"
 
-		fmt.Fprintf(os.Stderr, h)
+		fmt.Fprint(os.Stderr, h)
 	}
 }
 
-func main() {
+func GronMain() (int, error) {
 	var (
 		ungronFlag     bool
 		colorizeFlag   bool
@@ -178,10 +178,10 @@ func main() {
 	exitCode, err := a(rawInput, colorable.NewColorableStdout(), opts)
 
 	if exitCode != exitOK {
-		fatal(exitCode, err)
+		return exitCode, err
 	}
 
-	os.Exit(exitOK)
+	return exitOK, nil
 }
 
 // an actionFn represents a main action of the program, it accepts
